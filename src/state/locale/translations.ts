@@ -29,6 +29,10 @@ export const translations = {
     'hamburger.theme.light': 'Light',
     'hamburger.theme.dark': 'Dark',
     'hamburger.language': 'Language',
+    'hamburger.aisApiKey': 'Boat traffic (AIS) API key',
+    'hamburger.aisApiKeyPlaceholder': 'aisstream.io API key',
+    'hamburger.aisApiKeyHint':
+      'Free key from aisstream.io. Stored only on this device, never included in dashboard export.',
 
     // AddWidgetMenu
     'addWidget.close': 'Close',
@@ -61,7 +65,8 @@ export const translations = {
     'dashboardManager.create': 'Create',
     'dashboardManager.exportJson': 'Export JSON',
     'dashboardManager.importJson': 'Import JSON',
-    'dashboardManager.importErrorInvalid': 'That file is not a valid dashboard config.',
+    'dashboardManager.importErrorInvalid':
+      'That file is not a valid dashboard config.',
     'dashboardManager.importErrorParse': 'Could not read that file as JSON.',
     'dashboardManager.close': 'Close',
 
@@ -82,6 +87,7 @@ export const translations = {
     // WidgetSettingsPanel
     'widgetSettings.titleSuffix': '{{title}} settings',
     'widgetSettings.showHeader': 'Show widget header',
+    'widgetSettings.contentScale': 'Content scale',
     'widgetSettings.noSettings': 'This widget has no configurable settings.',
     'widgetSettings.cancel': 'Cancel',
     'widgetSettings.save': 'Save',
@@ -93,9 +99,11 @@ export const translations = {
     'widget.water': 'Water temperature',
     'widget.forecast': 'Forecast',
     'widget.minimap': 'Minimap',
+    'widget.rain': 'Rain risk',
 
     // MissingAddressNotice
-    'missingAddress.notice': 'Set an address for this dashboard to enable this widget.',
+    'missingAddress.notice':
+      'Set an address for this dashboard to enable this widget.',
 
     // SyncStatusBadge
     'syncStatus.synced': 'Synced',
@@ -124,8 +132,45 @@ export const translations = {
     'forecast.unableToLoad': 'Unable to load forecast.',
     'forecast.loading': 'Loading…',
 
+    // RainWidget
+    'rain.unableToLoad': 'Unable to load rain forecast.',
+    'rain.loading': 'Loading…',
+
     // ForecastWidgetSettings
     'forecastSettings.defaultRange': 'Default range',
+
+    // MinimapWidget / MinimapWidgetSettings
+    'minimap.resetView': 'Reset view',
+    'minimapSettings.showStationPin': 'Show water station pin',
+    'minimapSettings.pinSize': 'Pin size',
+    'minimapSettings.showBoatTraffic': 'Show boat traffic (AIS)',
+    'minimapSettings.showBoatTrafficHint':
+      "Needs an AIS API key, set in the hamburger menu. We can't reliably fetch all traffic, only a close, adjustable area around your address.",
+    'minimapSettings.boatTrafficRadius': 'Boat traffic radius: {{km}} km',
+    'minimapSettings.showBoatTrafficRadiusCircle': 'Show radius on map',
+    'minimapSettings.vesselIconSize': 'Vessel marker size',
+    'minimapSettings.vesselCategories': 'Vessel types to show',
+    'minimapSettings.vesselCategory.cargo': 'Cargo',
+    'minimapSettings.vesselCategory.tanker': 'Tanker',
+    'minimapSettings.vesselCategory.passenger': 'Passenger',
+    'minimapSettings.vesselCategory.fishing': 'Fishing',
+    'minimapSettings.vesselCategory.pleasure': 'Pleasure craft',
+    'minimapSettings.vesselCategory.highSpeed': 'High-speed craft',
+    'minimapSettings.vesselCategory.other': 'Other',
+
+    // AisStatusBadge
+    'ais.status.idle': 'AIS: idle',
+    'ais.status.noKey': 'AIS: no API key',
+    'ais.status.connecting': 'AIS: connecting…',
+    'ais.status.live': 'AIS: live',
+    'ais.status.error': 'AIS: reconnecting…',
+
+    // Vessel popover (minimap boat traffic)
+    'vessel.type': 'Type',
+    'vessel.speed': 'Speed',
+    'vessel.heading': 'Heading',
+    'vessel.destination': 'Destination',
+    'vessel.speedValue': '{{knots}} kn',
 
     // PlaceholderWidgetSettings
     'placeholderSettings.label': 'Label',
@@ -193,6 +238,10 @@ export const translations = {
     'hamburger.theme.light': 'Ljust',
     'hamburger.theme.dark': 'Mörkt',
     'hamburger.language': 'Språk',
+    'hamburger.aisApiKey': 'API-nyckel för båttrafik (AIS)',
+    'hamburger.aisApiKeyPlaceholder': 'API-nyckel från aisstream.io',
+    'hamburger.aisApiKeyHint':
+      'Gratis nyckel från aisstream.io. Sparas endast på den här enheten, ingår aldrig i exporterad instrumentpanel.',
 
     // AddWidgetMenu
     'addWidget.close': 'Stäng',
@@ -207,8 +256,10 @@ export const translations = {
       'Sök efter en ny adress för att centrera om alla platsbaserade widgetar.',
     'addressSetup.placeholder': 'Gata, ort eller plats',
     'addressSetup.searching': 'Söker…',
-    'addressSetup.searchError': 'Kunde inte söka efter den adressen. Försök igen.',
-    'addressSetup.noMatches': 'Inga träffar. Försök med en mer specifik adress.',
+    'addressSetup.searchError':
+      'Kunde inte söka efter den adressen. Försök igen.',
+    'addressSetup.noMatches':
+      'Inga träffar. Försök med en mer specifik adress.',
     'addressSetup.skipForNow': 'Hoppa över för nu',
     'addressSetup.cancel': 'Avbryt',
 
@@ -247,6 +298,7 @@ export const translations = {
     // WidgetSettingsPanel
     'widgetSettings.titleSuffix': 'Inställningar för {{title}}',
     'widgetSettings.showHeader': 'Visa widgetens rubrik',
+    'widgetSettings.contentScale': 'Innehållsskala',
     'widgetSettings.noSettings': 'Den här widgeten har inga inställningar.',
     'widgetSettings.cancel': 'Avbryt',
     'widgetSettings.save': 'Spara',
@@ -258,9 +310,11 @@ export const translations = {
     'widget.water': 'Vattentemperatur',
     'widget.forecast': 'Prognos',
     'widget.minimap': 'Minikarta',
+    'widget.rain': 'Regnrisk',
 
     // MissingAddressNotice
-    'missingAddress.notice': 'Ange en adress för den här instrumentpanelen för att aktivera widgeten.',
+    'missingAddress.notice':
+      'Ange en adress för den här instrumentpanelen för att aktivera widgeten.',
 
     // SyncStatusBadge
     'syncStatus.synced': 'Synkad',
@@ -283,14 +337,52 @@ export const translations = {
     'weather.field.condition': 'Himmel',
 
     // WeatherWidgetSettings
-    'weatherSettings.dragToReorder': 'Dra för att ändra ordning, kryssa för att visa',
+    'weatherSettings.dragToReorder':
+      'Dra för att ändra ordning, kryssa för att visa',
 
     // ForecastWidget
     'forecast.unableToLoad': 'Kunde inte hämta prognos.',
     'forecast.loading': 'Laddar…',
 
+    // RainWidget
+    'rain.unableToLoad': 'Kunde inte hämta regnprognos.',
+    'rain.loading': 'Laddar…',
+
     // ForecastWidgetSettings
     'forecastSettings.defaultRange': 'Standardintervall',
+
+    // MinimapWidget / MinimapWidgetSettings
+    'minimap.resetView': 'Återställ vy',
+    'minimapSettings.showStationPin': 'Visa markör för vattenstation',
+    'minimapSettings.pinSize': 'Markörstorlek',
+    'minimapSettings.showBoatTraffic': 'Visa båttrafik (AIS)',
+    'minimapSettings.showBoatTrafficHint':
+      'Kräver en AIS-API-nyckel, anges i hamburgarmenyn. Vi kan inte hämta all trafik tillförlitligt, bara ett nära, justerbart område runt din adress.',
+    'minimapSettings.boatTrafficRadius': 'Radie för båttrafik: {{km}} km',
+    'minimapSettings.showBoatTrafficRadiusCircle': 'Visa radie på kartan',
+    'minimapSettings.vesselIconSize': 'Storlek på fartygsmarkör',
+    'minimapSettings.vesselCategories': 'Fartygstyper att visa',
+    'minimapSettings.vesselCategory.cargo': 'Lastfartyg',
+    'minimapSettings.vesselCategory.tanker': 'Tankfartyg',
+    'minimapSettings.vesselCategory.passenger': 'Passagerarfartyg',
+    'minimapSettings.vesselCategory.fishing': 'Fiskebåt',
+    'minimapSettings.vesselCategory.pleasure': 'Fritidsbåt',
+    'minimapSettings.vesselCategory.highSpeed': 'Höghastighetsfartyg',
+    'minimapSettings.vesselCategory.other': 'Övrigt',
+
+    // AisStatusBadge
+    'ais.status.idle': 'AIS: inaktiv',
+    'ais.status.noKey': 'AIS: ingen API-nyckel',
+    'ais.status.connecting': 'AIS: ansluter…',
+    'ais.status.live': 'AIS: live',
+    'ais.status.error': 'AIS: återansluter…',
+
+    // Vessel popover (minimap boat traffic)
+    'vessel.type': 'Typ',
+    'vessel.speed': 'Fart',
+    'vessel.heading': 'Kurs',
+    'vessel.destination': 'Destination',
+    'vessel.speedValue': '{{knots}} kn',
 
     // PlaceholderWidgetSettings
     'placeholderSettings.label': 'Etikett',

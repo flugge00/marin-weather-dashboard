@@ -38,7 +38,7 @@ export function SyncStatusBadge({
   }
 
   useEffect(() => {
-    const id = setInterval(() => forceTick((tick) => tick + 1), 30_000)
+    const id = setInterval(() => forceTick((tick) => tick + 1), 1_000)
     return () => clearInterval(id)
   }, [])
 

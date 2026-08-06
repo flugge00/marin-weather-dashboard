@@ -1,9 +1,14 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { readJson, writeJson } from '../../lib/storage/localStorageJson'
+import {
+  readJson,
+  removeJson,
+  writeJson,
+} from '../../lib/storage/localStorageJson'
 import { AppSettingsContext, type ThemeMode } from './context'
 
 const REFRESH_INTERVAL_KEY = 'marin-dashboard:settings:refreshIntervalMs'
 const THEME_MODE_KEY = 'marin-dashboard:settings:themeMode'
+const AIS_API_KEY_KEY = 'marin-dashboard:settings:aisApiKey'
 
 export const DEFAULT_REFRESH_INTERVAL_MS = 60_000
 export const MIN_REFRESH_INTERVAL_MS = 5_000
@@ -30,6 +35,19 @@ export function AppSettingsProvider({ children }: { children: ReactNode }) {
   const [themeMode, setThemeModeState] = useState<ThemeMode>(
     () => readJson<ThemeMode>(THEME_MODE_KEY) ?? 'auto',
   )
+  const [aisApiKey, setAisApiKeyState] = useState<string | null>(() =>
+    readJson<string>(AIS_API_KEY_KEY),
+  )
+
+  const setAisApiKey = (key: string) => {
+    const trimmed = key.trim()
+    if (trimmed) {
+      writeJson(AIS_API_KEY_KEY, trimmed)
+    } else {
+      removeJson(AIS_API_KEY_KEY)
+    }
+    setAisApiKeyState(trimmed || null)
+  }
 
   const setRefreshIntervalMinutes = (minutes: number) => {
     if (!Number.isFinite(minutes)) return
@@ -66,6 +84,8 @@ export function AppSettingsProvider({ children }: { children: ReactNode }) {
         setRefreshIntervalMinutes,
         themeMode,
         setThemeMode,
+        aisApiKey,
+        setAisApiKey,
       }}
     >
       {children}

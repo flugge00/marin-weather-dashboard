@@ -8,13 +8,22 @@ import { triggerGlobalRefresh } from '../state/refreshBus'
  * Hidden hamburger menu (tasks 6.9/6.10/6.14): force-refresh every widget's
  * data at once, set how often widgets poll (decimal minutes allowed), and
  * pick the light/dark/auto palette. Available in both kiosk and edit mode -
- * these are viewing preferences, not layout edits.
+ * these are viewing preferences, not layout edits. Also holds the personal
+ * aisstream.io API key for the minimap's boat-traffic feed (task 8.3) - a
+ * device credential, not dashboard config.
  */
 export function HamburgerMenu() {
   const [open, setOpen] = useState(false)
-  const { refreshIntervalMs, setRefreshIntervalMinutes, themeMode, setThemeMode } =
-    useAppSettings()
+  const {
+    refreshIntervalMs,
+    setRefreshIntervalMinutes,
+    themeMode,
+    setThemeMode,
+    aisApiKey,
+    setAisApiKey,
+  } = useAppSettings()
   const { locale, setLocale, t } = useLocale()
+  const [aisKeyDraft, setAisKeyDraft] = useState(aisApiKey ?? '')
 
   const THEME_OPTIONS: { key: ThemeMode; label: string }[] = [
     { key: 'auto', label: t('hamburger.theme.auto') },
@@ -30,7 +39,8 @@ export function HamburgerMenu() {
   // menu (e.g. another tab/reload changed it) - adjusted during render
   // rather than an effect, same pattern as DashboardManagerModal's rename
   // draft reset.
-  const [renderedIntervalMs, setRenderedIntervalMs] = useState(refreshIntervalMs)
+  const [renderedIntervalMs, setRenderedIntervalMs] =
+    useState(refreshIntervalMs)
   if (refreshIntervalMs !== renderedIntervalMs) {
     setRenderedIntervalMs(refreshIntervalMs)
     setIntervalDraft(String(refreshIntervalMs / 60_000))
@@ -115,6 +125,23 @@ export function HamburgerMenu() {
               ))}
             </div>
           </div>
+
+          <label className="mb-4 block text-sm">
+            <span className="mb-1 block text-surface-muted">
+              {t('hamburger.aisApiKey')}
+            </span>
+            <input
+              type="password"
+              value={aisKeyDraft}
+              placeholder={t('hamburger.aisApiKeyPlaceholder')}
+              onChange={(event) => setAisKeyDraft(event.target.value)}
+              onBlur={() => setAisApiKey(aisKeyDraft)}
+              className="w-full rounded-lg border border-surface-border bg-surface-base px-3 py-2 text-surface-text"
+            />
+            <span className="mt-1 block text-xs text-surface-muted">
+              {t('hamburger.aisApiKeyHint')}
+            </span>
+          </label>
 
           <div className="text-sm">
             <span className="mb-1 block text-surface-muted">

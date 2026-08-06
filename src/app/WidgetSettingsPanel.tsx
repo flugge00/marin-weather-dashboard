@@ -3,6 +3,11 @@ import { useDashboardConfig } from '../state/dashboardConfig/context'
 import type { WidgetConfig } from '../state/dashboardConfig/types'
 import { useLocale } from '../state/locale/context'
 import { widgetNameKey } from '../state/locale/translations'
+import {
+  MAX_CONTENT_SCALE,
+  MIN_CONTENT_SCALE,
+  readContentScale,
+} from '../widgets/contentScale'
 import { getWidgetDefinition } from '../widgets/registry'
 
 interface WidgetSettingsPanelProps {
@@ -28,6 +33,7 @@ export function WidgetSettingsPanel({
   const [draft, setDraft] = useState(widget.settings)
   const SettingsForm = definition.renderSettings
   const showHeader = draft.showHeader !== false
+  const contentScale = readContentScale(draft)
 
   const handleSave = () => {
     updateWidgetSettings(pageIndex, widget.id, draft)
@@ -40,35 +46,58 @@ export function WidgetSettingsPanel({
       onClick={onClose}
     >
       <div
-        className="modal-fade-in w-80 rounded-2xl border border-surface-border bg-surface-raised p-5 shadow-2xl"
+        className="modal-fade-in flex max-h-[85vh] w-80 flex-col rounded-2xl border border-surface-border bg-surface-raised shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 className="mb-4 text-base font-semibold">
+        <h2 className="shrink-0 px-5 pt-5 pb-4 text-base font-semibold">
           {t('widgetSettings.titleSuffix', {
             title: t(widgetNameKey(definition.type)),
           })}
         </h2>
 
-        <label className="mb-4 flex items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            checked={showHeader}
-            onChange={(event) =>
-              setDraft({ ...draft, showHeader: event.target.checked })
-            }
-          />
-          {t('widgetSettings.showHeader')}
-        </label>
+        <div className="min-h-0 flex-1 overflow-y-auto px-5">
+          <label className="mb-4 flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={showHeader}
+              onChange={(event) =>
+                setDraft({ ...draft, showHeader: event.target.checked })
+              }
+            />
+            {t('widgetSettings.showHeader')}
+          </label>
 
-        {SettingsForm ? (
-          <SettingsForm settings={draft} onChange={setDraft} />
-        ) : (
-          <p className="text-sm text-surface-muted">
-            {t('widgetSettings.noSettings')}
-          </p>
-        )}
+          <label className="mb-4 block text-sm">
+            <span className="mb-1 flex items-center justify-between text-surface-muted">
+              {t('widgetSettings.contentScale')}
+              <span className="tabular-nums">{contentScale.toFixed(2)}×</span>
+            </span>
+            <input
+              type="range"
+              min={MIN_CONTENT_SCALE}
+              max={MAX_CONTENT_SCALE}
+              step={0.05}
+              value={contentScale}
+              onChange={(event) =>
+                setDraft({
+                  ...draft,
+                  contentScale: Number(event.target.value),
+                })
+              }
+              className="w-full"
+            />
+          </label>
 
-        <div className="mt-5 flex justify-end gap-2">
+          {SettingsForm ? (
+            <SettingsForm settings={draft} onChange={setDraft} />
+          ) : (
+            <p className="text-sm text-surface-muted">
+              {t('widgetSettings.noSettings')}
+            </p>
+          )}
+        </div>
+
+        <div className="flex shrink-0 justify-end gap-2 px-5 pt-4 pb-5">
           <button
             type="button"
             onClick={onClose}

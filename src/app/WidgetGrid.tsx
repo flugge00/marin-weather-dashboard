@@ -6,6 +6,7 @@ import type { WidgetConfig } from '../state/dashboardConfig/types'
 import { useLocale } from '../state/locale/context'
 import { widgetNameKey } from '../state/locale/translations'
 import { useUIMode } from '../state/uiModeContext'
+import { readContentScale } from '../widgets/contentScale'
 import { getWidgetDefinition } from '../widgets/registry'
 import { WidgetShell } from '../widgets/WidgetShell'
 import { AddWidgetMenu } from './AddWidgetMenu'
@@ -38,7 +39,8 @@ interface WidgetGridProps {
  */
 export function WidgetGrid({ pageIndex, widgets }: WidgetGridProps) {
   const { isEditMode } = useUIMode()
-  const { updateWidgetLayouts, removeWidget } = useDashboardConfig()
+  const { updateWidgetLayouts, removeWidget, updateWidgetSettings } =
+    useDashboardConfig()
   const { t } = useLocale()
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -109,10 +111,16 @@ export function WidgetGrid({ pageIndex, widgets }: WidgetGridProps) {
                 <WidgetShell
                   title={t(widgetNameKey(definition.type))}
                   showHeader={widget.settings.showHeader !== false}
+                  contentScale={readContentScale(widget.settings)}
                   onSettings={() => setSettingsWidgetId(widget.id)}
                   onRemove={() => removeWidget(pageIndex, widget.id)}
                 >
-                  <Component settings={widget.settings} />
+                  <Component
+                    settings={widget.settings}
+                    onSettingsChange={(newSettings) =>
+                      updateWidgetSettings(pageIndex, widget.id, newSettings)
+                    }
+                  />
                 </WidgetShell>
               </div>
             )

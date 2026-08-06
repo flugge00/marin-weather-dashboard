@@ -6,6 +6,13 @@ interface WidgetShellProps {
   title: string
   /** Per-widget setting (task 6.8): show the title bar in kiosk mode too. */
   showHeader: boolean
+  /**
+   * Per-widget setting (task 6.1.4): scales the content pane's font size,
+   * padding, and margins together (via CSS transform) so a widget shrunk
+   * too small in the grid can still be made to fit by dialing this down,
+   * or a large one filled out by dialing it up. 1 = no scaling.
+   */
+  contentScale: number
   onSettings: () => void
   onRemove: () => void
   children: ReactNode
@@ -29,6 +36,7 @@ interface WidgetShellProps {
 export function WidgetShell({
   title,
   showHeader,
+  contentScale,
   onSettings,
   onRemove,
   children,
@@ -72,7 +80,22 @@ export function WidgetShell({
           )}
         </div>
       )}
-      <div className="min-h-0 flex-1 overflow-hidden">{children}</div>
+      <div className="min-h-0 flex-1 overflow-hidden">
+        {contentScale !== 1 ? (
+          <div
+            style={{
+              width: `${100 / contentScale}%`,
+              height: `${100 / contentScale}%`,
+              transform: `scale(${contentScale})`,
+              transformOrigin: 'top left',
+            }}
+          >
+            {children}
+          </div>
+        ) : (
+          children
+        )}
+      </div>
     </div>
   )
 }

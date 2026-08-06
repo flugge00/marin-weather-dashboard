@@ -4,9 +4,9 @@ import { useDashboardConfig } from '../../state/dashboardConfig/context'
 import { useDataSource } from '../../lib/dataSource/useDataSource'
 import { fetchForecast } from '../../lib/smhi/forecastClient'
 import { describeWeatherSymbol } from '../../lib/smhi/weatherSymbol'
-import type { ForecastPoint } from '../../lib/smhi/types'
 import { useLocale } from '../../state/locale/context'
 import { MissingAddressNotice } from '../shared/MissingAddressNotice'
+import { selectStripPoints } from '../shared/forecastStrip'
 import { SyncStatusBadge } from '../shared/SyncStatusBadge'
 import { WeatherIcon } from '../shared/WeatherIcon'
 import {
@@ -15,20 +15,6 @@ import {
   RANGE_OPTIONS,
   type ForecastRange,
 } from './forecastRange'
-
-const MAX_STRIP_ITEMS = 8
-
-function selectStripPoints(
-  points: ForecastPoint[],
-  rangeHours: number,
-): ForecastPoint[] {
-  const cutoff = Date.now() + rangeHours * 60 * 60 * 1000
-  const inRange = points.filter((point) => point.time.getTime() <= cutoff)
-  if (inRange.length <= MAX_STRIP_ITEMS) return inRange
-
-  const step = Math.ceil(inRange.length / MAX_STRIP_ITEMS)
-  return inRange.filter((_, index) => index % step === 0).slice(0, MAX_STRIP_ITEMS)
-}
 
 const hourFormatter = new Intl.DateTimeFormat(undefined, { hour: '2-digit' })
 const dayFormatter = new Intl.DateTimeFormat(undefined, {
@@ -62,7 +48,8 @@ export function ForecastWidget({
   if (!coords) return <MissingAddressNotice />
 
   const stripPoints = data ? selectStripPoints(data.points, RANGE_HOURS[range]) : []
-  const labelFormatter = range === '12h' || range === '24h' ? hourFormatter : dayFormatter
+  const labelFormatter =
+    range === '6h' || range === '12h' || range === '24h' ? hourFormatter : dayFormatter
 
   return (
     <div className="flex h-full w-full flex-col gap-2 p-3">
