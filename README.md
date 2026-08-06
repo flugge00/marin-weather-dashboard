@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# Marin Weather Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A customizable weather and marine-conditions dashboard for a boat address (or any address) on the Swedish coast, built on public [SMHI](https://opendata.smhi.se) data. Designed as a wall/tablet display: drag-and-drop widget grid, day/night auto-theme, and English/Swedish language support.
 
-Currently, two official plugins are available:
+**Live site:** https://flugge00.github.io/marin-weather-dashboard/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Drag-and-resize widget grid with multiple pages, saved to local storage
+- Widgets: Clock, Weather, Forecast, Rain risk, Water temperature, Sea level, Waves, Air pressure, Weather warnings, Minimap
+- Address setup with geocoding, so widgets pull data for a specific location
+- Auto light/dark theme based on time of day
+- English/Swedish language switcher
+- Works offline-ish as a PWA (installable, cached shell)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Running locally
 
-## Expanding the ESLint configuration
+Requires [Node.js](https://nodejs.org/).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This starts a local dev server (Vite) with hot reload, printed to the terminal.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Other scripts:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build         # type-check and build for production (outputs to dist/)
+npm run preview       # preview the production build locally
+npm run lint          # run ESLint
+npm run format         # format with Prettier
+npm run format:check   # check formatting without writing
 ```
+
+## Deployment
+
+Pushing to `main` deploys automatically to GitHub Pages via the GitHub Actions workflow in [.github/workflows/deploy.yml](.github/workflows/deploy.yml).
