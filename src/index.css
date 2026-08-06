@@ -35,12 +35,25 @@
   --color-status-stale: #eab308;
   --color-status-error: #ef4444;
 
-  /* Dashboard surface colors (dark-first: default display environment is a dim kitchen) */
+  /* Dashboard surface colors (night palette - default, since the display's
+     primary use is an always-on kitchen screen after dark). A brighter
+     "day" palette overrides these via [data-theme="day"] below (task 5.2). */
   --color-surface-base: #0b0e14;
   --color-surface-raised: #131822;
+  --color-surface-hover: #1b2230;
   --color-surface-border: #232a38;
   --color-surface-text: #e7ecf5;
   --color-surface-muted: #8b93a7;
+}
+
+/* Brighter daytime palette, swapped in by useDayNightTheme (task 5.2). */
+:root[data-theme='day'] {
+  --color-surface-base: #eef1f7;
+  --color-surface-raised: #ffffff;
+  --color-surface-hover: #e3e8f0;
+  --color-surface-border: #d7dde8;
+  --color-surface-text: #171b25;
+  --color-surface-muted: #5b6472;
 }
 
 html,
@@ -57,4 +70,45 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+
+/* Shared focus ring for keyboard/switch-control accessibility - the app is
+   touch-first but shouldn't be a dead end for anyone navigating by keyboard. */
+:focus-visible {
+  outline: 2px solid var(--color-brand-400);
+  outline-offset: 2px;
+}
+
+@keyframes sync-pulse {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.7);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.sync-pulse {
+  animation: sync-pulse 0.6s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-fade-in {
+  animation: modal-fade-in 0.18s ease-out;
 }
