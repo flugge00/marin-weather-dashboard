@@ -1,0 +1,161 @@
+{
+  "id": "7bd1f30f-f750-4ed0-983f-1e4b132a487a",
+  "name": "Sandbryggan",
+  "address": "Sandbryggan, 209, Möddebo, Norrköpings kommun, Östergötland County, 610 25, Sweden",
+  "coords": {
+    "lat": 58.5221653,
+    "lon": 16.8406286
+  },
+  "pages": [
+    {
+      "widgets": [
+        {
+          "id": "1a05c464-6c87-4432-9119-49fc7c1b9a7d",
+          "type": "water",
+          "layout": {
+            "x": 0,
+            "y": 4,
+            "w": 3,
+            "h": 3
+          },
+          "settings": {
+            "contentScale": 1
+          }
+        },
+        {
+          "id": "6058156f-c516-42a1-9ac7-9ab1e91e5376",
+          "type": "minimap",
+          "layout": {
+            "x": 6,
+            "y": 0,
+            "w": 6,
+            "h": 5
+          },
+          "settings": {
+            "showHeader": false,
+            "pinSizePx": 35,
+            "mapView": {
+              "lat": 58.53289678632558,
+              "lon": 16.873642331053055,
+              "zoom": 10,
+              "addressLat": 58.5221653,
+              "addressLon": 16.8406286
+            },
+            "showBoatTraffic": false,
+            "boatTrafficRadiusKm": 500,
+            "vesselIconSizePx": 28
+          }
+        },
+        {
+          "id": "954e9760-f5ca-46cb-90b8-5fc3096e9164",
+          "type": "forecast",
+          "layout": {
+            "x": 6,
+            "y": 5,
+            "w": 6,
+            "h": 3
+          },
+          "settings": {
+            "defaultRange": "24h"
+          }
+        },
+        {
+          "id": "661e6228-761c-4a1f-90f6-478e009333a3",
+          "type": "weather",
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 6,
+            "h": 4
+          },
+          "settings": {
+            "fields": [
+              {
+                "key": "temperature",
+                "visible": true
+              },
+              {
+                "key": "wind",
+                "visible": true
+              },
+              {
+                "key": "windGust",
+                "visible": true
+              },
+              {
+                "key": "windDirection",
+                "visible": true
+              },
+              {
+                "key": "condition",
+                "visible": true
+              }
+            ],
+            "contentScale": 1
+          }
+        },
+        {
+          "id": "42b3bc93-4dc3-4f86-ad93-535ec5e75646",
+          "type": "sealevel",
+          "layout": {
+            "x": 3,
+            "y": 4,
+            "w": 3,
+            "h": 3
+          },
+          "settings": {}
+        }
+      ]
+    },
+    {
+      "widgets": [
+        {
+          "id": "4088847d-5e12-4552-93cc-c8c54d662afe",
+          "type": "warnings",
+          "layout": {
+            "x": 0,
+            "y": 0,
+            "w": 6,
+            "h": 5
+          },
+          "settings": {}
+        },
+        {
+          "id": "28216fa7-f8dd-468c-8540-618cf9629d16",
+          "type": "pressure",
+          "layout": {
+            "x": 9,
+            "y": 3,
+            "w": 3,
+            "h": 3
+          },
+          "settings": {}
+        },
+        {
+          "id": "ff896571-725b-48df-b53c-c88a769d5b07",
+          "type": "wave",
+          "layout": {
+            "x": 6,
+            "y": 3,
+            "w": 3,
+            "h": 3
+          },
+          "settings": {}
+        },
+        {
+          "id": "94a5b3b7-f0aa-4b4e-93ca-6e718491b348",
+          "type": "rain",
+          "layout": {
+            "x": 6,
+            "y": 0,
+            "w": 6,
+            "h": 3
+          },
+          "settings": {
+            "defaultRange": "24h"
+          }
+        }
+      ]
+    }
+  ]
+}

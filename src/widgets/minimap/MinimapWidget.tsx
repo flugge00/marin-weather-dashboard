@@ -395,16 +395,18 @@ export function MinimapWidget({
   return (
     <div className="relative h-full w-full">
       <div ref={containerRef} className="h-full w-full" />
-      {showBoatTraffic && <AisStatusBadge status={aisStatus} />}
-      {isEditMode && (
-        <button
-          type="button"
-          onClick={handleResetView}
-          className="absolute bottom-2 right-2 z-[500] rounded-md border border-surface-border bg-surface-raised px-2 py-1 text-xs font-medium text-surface-text shadow-md hover:bg-surface-hover"
-        >
-          {t('minimap.resetView')}
-        </button>
-      )}
+      <div className="absolute top-2 right-2 z-[500] flex flex-col items-end gap-1.5">
+        {showBoatTraffic && <AisStatusBadge status={aisStatus} />}
+        {isEditMode && (
+          <button
+            type="button"
+            onClick={handleResetView}
+            className="rounded-md border border-surface-border bg-surface-raised px-2 py-1 text-xs font-medium text-surface-text shadow-md hover:bg-surface-hover"
+          >
+            {t('minimap.resetView')}
+          </button>
+        )}
+      </div>
     </div>
   )
 }

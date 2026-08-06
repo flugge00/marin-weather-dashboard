@@ -7,11 +7,13 @@ import { DEFAULT_FORECAST_SETTINGS } from './forecast/forecastRange'
 import { MinimapWidget } from './minimap/MinimapWidget'
 import { MinimapWidgetSettings } from './minimap/MinimapWidgetSettings'
 import { DEFAULT_MINIMAP_SETTINGS } from './minimap/minimapSettings'
-import { PlaceholderWidget } from './placeholder/PlaceholderWidget'
-import { PlaceholderWidgetSettings } from './placeholder/PlaceholderWidgetSettings'
+import { PressureWidget } from './pressure/PressureWidget'
 import { RainWidget } from './rain/RainWidget'
+import { SeaLevelWidget } from './sealevel/SeaLevelWidget'
 import type { WidgetSettingsProps } from './types'
+import { WarningsWidget } from './warnings/WarningsWidget'
 import { WaterWidget } from './water/WaterWidget'
+import { WaveWidget } from './wave/WaveWidget'
 import { WeatherWidget } from './weather/WeatherWidget'
 import { WeatherWidgetSettings } from './weather/WeatherWidgetSettings'
 import { DEFAULT_WEATHER_SETTINGS } from './weather/weatherFields'
@@ -36,19 +38,10 @@ export interface WidgetDefinition {
 }
 
 /**
- * Every widget type the grid can place is registered here. Phase 4's real
- * widgets (clock, weather, water, forecast, minimap) add entries the same
- * way `placeholder` does; nothing elsewhere needs to change.
+ * Every widget type the grid can place is registered here. New widgets add
+ * an entry the same way `clock` does; nothing elsewhere needs to change.
  */
 const registry: Record<string, WidgetDefinition> = {
-  placeholder: {
-    type: 'placeholder',
-    displayName: 'Placeholder',
-    defaultLayout: { x: 0, y: 0, w: 4, h: 3 },
-    defaultSettings: { label: 'New widget' },
-    component: PlaceholderWidget,
-    renderSettings: PlaceholderWidgetSettings,
-  },
   clock: {
     type: 'clock',
     displayName: 'Clock',
@@ -94,6 +87,34 @@ const registry: Record<string, WidgetDefinition> = {
     defaultSettings: DEFAULT_FORECAST_SETTINGS,
     component: RainWidget,
     renderSettings: ForecastWidgetSettings,
+  },
+  sealevel: {
+    type: 'sealevel',
+    displayName: 'Sea level',
+    defaultLayout: { x: 0, y: 0, w: 3, h: 3 },
+    defaultSettings: {},
+    component: SeaLevelWidget,
+  },
+  wave: {
+    type: 'wave',
+    displayName: 'Waves',
+    defaultLayout: { x: 0, y: 0, w: 4, h: 3 },
+    defaultSettings: {},
+    component: WaveWidget,
+  },
+  pressure: {
+    type: 'pressure',
+    displayName: 'Air pressure',
+    defaultLayout: { x: 0, y: 0, w: 3, h: 3 },
+    defaultSettings: {},
+    component: PressureWidget,
+  },
+  warnings: {
+    type: 'warnings',
+    displayName: 'Weather warnings',
+    defaultLayout: { x: 0, y: 0, w: 6, h: 4 },
+    defaultSettings: {},
+    component: WarningsWidget,
   },
 }
 

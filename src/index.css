@@ -34,6 +34,8 @@
   --color-status-ok: #22c55e;
   --color-status-stale: #eab308;
   --color-status-error: #ef4444;
+  /* Extra severity step for SMHI warning levels (Gul/Orange/Röd) - "orange" sits between the sync-indicator yellow and red above. */
+  --color-status-orange: #f97316;
 
   /* Dashboard surface colors (night palette - default, since the display's
      primary use is an always-on kitchen screen after dark). A brighter
@@ -111,4 +113,59 @@ body {
 
 .modal-fade-in {
   animation: modal-fade-in 0.18s ease-out;
+}
+
+/* Confines each grid item's own stacking (Leaflet's map controls included -
+   they use z-index up to 1000 internally) to that item, so nothing from one
+   widget's content can paint over another widget's chrome, or over this
+   item's own resize handle below. */
+.react-grid-item {
+  isolation: isolate;
+}
+
+/* Widget resize handle (react-grid-layout): the library's default 20px
+   corner target and hover-only visibility are fine with a mouse, but this
+   is a touch-first kiosk display - a small hidden target makes it easy to
+   miss and drag/pan the widget's own content (e.g. the minimap) instead of
+   resizing. Enlarge the hit area and the visible glyph, and keep it visible
+   without a hover state since touchscreens don't have one.
+   !important because react-grid-layout's own stylesheet
+   (react-grid-layout/css/styles.css) is imported by a component deep in the
+   tree (WidgetGrid.tsx) and, at equal selector specificity, wins the
+   cascade over this global stylesheet's later-loses-to-earlier ordering in
+   dev - important is the only way to reliably win regardless of import
+   order. z-index is likewise pinned above Leaflet's own control layer
+   (z-index: 1000) so the minimap's attribution control can't sit on top of
+   and swallow taps meant for the handle. */
+.react-grid-item > .react-resizable-handle {
+  width: 40px !important;
+  height: 40px !important;
+  opacity: 1 !important;
+  z-index: 1001 !important;
+}
+
+/* A plain border-color glyph reads fine on the app's own flat surfaces, but
+   widget content varies wildly (map tiles, charts, photos) - a thin line
+   can disappear against it. Give the glyph a small opaque chip behind it so
+   it stays legible regardless of what's underneath. */
+.react-grid-item > .react-resizable-handle::before {
+  content: '';
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 9999px;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-surface-border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.react-grid-item > .react-resizable-handle::after {
+  right: 13px !important;
+  bottom: 13px !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-right: 2.5px solid var(--color-surface-muted) !important;
+  border-bottom: 2.5px solid var(--color-surface-muted) !important;
 }

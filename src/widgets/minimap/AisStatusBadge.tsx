@@ -24,7 +24,7 @@ export function AisStatusBadge({ status }: { status: AisConnectionStatus }) {
   if (status === 'idle') return null
 
   return (
-    <span className="absolute top-2 right-2 z-[500] flex items-center gap-1.5 rounded-md border border-surface-border bg-surface-raised/90 px-2 py-1 text-xs font-medium text-surface-text shadow-md">
+    <span className="flex items-center gap-1.5 rounded-md border border-surface-border bg-surface-raised/90 px-2 py-1 text-xs font-medium text-surface-text shadow-md">
       <span
         className="h-2 w-2 shrink-0 rounded-full"
         style={{ backgroundColor: STATUS_COLOR[status] }}

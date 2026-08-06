@@ -1,4 +1,4 @@
-import { createEmptyDashboardConfig } from '../../state/dashboardConfig/defaults'
+import { createStarterDashboardConfig } from '../../state/dashboardConfig/defaults'
 import type {
   DashboardConfig,
   DashboardSummary,
@@ -74,8 +74,8 @@ export function setActiveDashboardId(id: string): void {
 
 /**
  * Boots dashboard storage: returns the active config, falling back to the
- * first saved dashboard, and finally creating a fresh empty one if this
- * device has never had a dashboard configured (first-run).
+ * first saved dashboard, and finally creating a populated starter dashboard
+ * if this device has never had a dashboard configured (first-run).
  */
 export function ensureActiveDashboard(): DashboardConfig {
   const activeId = getActiveDashboardId()
@@ -89,7 +89,7 @@ export function ensureActiveDashboard(): DashboardConfig {
     return first
   }
 
-  const fresh = createEmptyDashboardConfig('My Dashboard')
+  const fresh = createStarterDashboardConfig()
   saveDashboard(fresh)
   setActiveDashboardId(fresh.id)
   return fresh

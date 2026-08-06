@@ -93,13 +93,16 @@ export const translations = {
     'widgetSettings.save': 'Save',
 
     // Widget display names (registry)
-    'widget.placeholder': 'Placeholder',
     'widget.clock': 'Clock',
     'widget.weather': 'Weather',
     'widget.water': 'Water temperature',
     'widget.forecast': 'Forecast',
     'widget.minimap': 'Minimap',
     'widget.rain': 'Rain risk',
+    'widget.sealevel': 'Sea level',
+    'widget.wave': 'Waves',
+    'widget.pressure': 'Air pressure',
+    'widget.warnings': 'Weather warnings',
 
     // MissingAddressNotice
     'missingAddress.notice':
@@ -136,6 +139,30 @@ export const translations = {
     'rain.unableToLoad': 'Unable to load rain forecast.',
     'rain.loading': 'Loading…',
 
+    // SeaLevelWidget
+    'sealevel.unableToLoad': 'Unable to load sea level.',
+    'sealevel.noStations': 'No stations currently reporting.',
+    'sealevel.loading': 'Loading…',
+    'sealevel.trend': '{{value}} cm/h',
+
+    // WaveWidget
+    'wave.unableToLoad': 'Unable to load wave data.',
+    'wave.noStations': 'No buoys currently reporting.',
+    'wave.loading': 'Loading…',
+    'wave.height': 'Height',
+    'wave.period': 'Period',
+
+    // PressureWidget
+    'pressure.unableToLoad': 'Unable to load air pressure.',
+    'pressure.noStations': 'No stations currently reporting.',
+    'pressure.loading': 'Loading…',
+    'pressure.trend': '{{value}} hPa/3h',
+
+    // WarningsWidget
+    'warnings.unableToLoad': 'Unable to load weather warnings.',
+    'warnings.loading': 'Loading…',
+    'warnings.none': 'No active warnings for this area.',
+
     // ForecastWidgetSettings
     'forecastSettings.defaultRange': 'Default range',
 
@@ -171,10 +198,6 @@ export const translations = {
     'vessel.heading': 'Heading',
     'vessel.destination': 'Destination',
     'vessel.speedValue': '{{knots}} kn',
-
-    // PlaceholderWidgetSettings
-    'placeholderSettings.label': 'Label',
-    'placeholderWidget.defaultLabel': 'Widget',
 
     // WeatherWidgetSettings field meta labels (long form)
     'weatherFieldMeta.temperature': 'Temperature',
@@ -304,13 +327,16 @@ export const translations = {
     'widgetSettings.save': 'Spara',
 
     // Widget display names (registry)
-    'widget.placeholder': 'Platshållare',
     'widget.clock': 'Klocka',
     'widget.weather': 'Väder',
     'widget.water': 'Vattentemperatur',
     'widget.forecast': 'Prognos',
     'widget.minimap': 'Minikarta',
     'widget.rain': 'Regnrisk',
+    'widget.sealevel': 'Havsvattenstånd',
+    'widget.wave': 'Vågor',
+    'widget.pressure': 'Lufttryck',
+    'widget.warnings': 'Vädervarningar',
 
     // MissingAddressNotice
     'missingAddress.notice':
@@ -348,6 +374,30 @@ export const translations = {
     'rain.unableToLoad': 'Kunde inte hämta regnprognos.',
     'rain.loading': 'Laddar…',
 
+    // SeaLevelWidget
+    'sealevel.unableToLoad': 'Kunde inte hämta havsvattenstånd.',
+    'sealevel.noStations': 'Inga stationer rapporterar just nu.',
+    'sealevel.loading': 'Laddar…',
+    'sealevel.trend': '{{value}} cm/h',
+
+    // WaveWidget
+    'wave.unableToLoad': 'Kunde inte hämta vågdata.',
+    'wave.noStations': 'Inga bojar rapporterar just nu.',
+    'wave.loading': 'Laddar…',
+    'wave.height': 'Höjd',
+    'wave.period': 'Period',
+
+    // PressureWidget
+    'pressure.unableToLoad': 'Kunde inte hämta lufttryck.',
+    'pressure.noStations': 'Inga stationer rapporterar just nu.',
+    'pressure.loading': 'Laddar…',
+    'pressure.trend': '{{value}} hPa/3h',
+
+    // WarningsWidget
+    'warnings.unableToLoad': 'Kunde inte hämta vädervarningar.',
+    'warnings.loading': 'Laddar…',
+    'warnings.none': 'Inga aktiva varningar för det här området.',
+
     // ForecastWidgetSettings
     'forecastSettings.defaultRange': 'Standardintervall',
 
@@ -383,10 +433,6 @@ export const translations = {
     'vessel.heading': 'Kurs',
     'vessel.destination': 'Destination',
     'vessel.speedValue': '{{knots}} kn',
-
-    // PlaceholderWidgetSettings
-    'placeholderSettings.label': 'Etikett',
-    'placeholderWidget.defaultLabel': 'Widget',
 
     // WeatherWidgetSettings field meta labels (long form)
     'weatherFieldMeta.temperature': 'Temperatur',
