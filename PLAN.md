@@ -63,7 +63,7 @@ free static host), at the cost of two tradeoffs worth remembering as we build:
 - [x] 0.1 Scaffold Vite + React + TypeScript project
 - [x] 0.2 Add Tailwind CSS and base design tokens (colors, spacing, font scale)
 - [x] 0.3 Set up ESLint/Prettier, basic folder structure (`widgets/`, `lib/`, `state/`)
-- [/] 0.4 Set up static hosting (Cloudflare Pages/Netlify/Vercel) with push-to-deploy from the repo
+- [x] 0.4 Set up static hosting (Cloudflare Pages/Netlify/Vercel) with push-to-deploy from the repo — done in Phase 7.1 instead, via GitHub Pages
 - [x] 0.5 Add PWA manifest + icons so "Add to Home Screen" launches fullscreen/standalone on iPadOS
 
 ## Phase 1 — Data layer
@@ -144,9 +144,9 @@ All Phase 6 changes verified in a real browser (Playwright) against live SMHI/oc
 - [x] 6.1.8 Add a rain prediction forecast widget which shows a graph of when there is potential for rain in the area. Show the risk at the y axis and the time on the x axis. Let me toggle between 6h, 12h, 3d and 1week as the other forecast also. Only do this if there is good data to be fetched from SMHI. — SMHI's `snow1g` forecast already parses `probability_of_precipitation` per point ([types.ts](src/lib/smhi/types.ts)), so no new data source was needed; new **Rain risk** widget — [RainWidget.tsx](src/widgets/rain/RainWidget.tsx), registered in [registry.ts](src/widgets/registry.ts), reuses the forecast widget's range selector/settings form and a shared point-downsampling helper factored out into [forecastStrip.ts](src/widgets/shared/forecastStrip.ts) — renders a bar chart (risk % on the y-axis, time on the x-axis) using a single-hue sequential ramp keyed to risk magnitude, with a direct label on every bar above 5% risk (not just the single peak) per the dataviz skill's "selective direct labels" guidance
 - [x] 6.1.9 When I refresh the page the minimap position resets. I want the minimap position to be saved in the configuration somehow also. So that it sticks even after a page refresh. — widget components can now optionally self-persist into their own settings via a new `onSettingsChange` prop threaded through from [WidgetGrid.tsx](src/app/WidgetGrid.tsx) (`registry.ts`'s `WidgetDefinition.component` type widened accordingly); [MinimapWidget.tsx](src/widgets/minimap/MinimapWidget.tsx) writes the map's center/zoom into `settings.mapView` on every user-driven `moveend`/`zoomend` (a ref flag distinguishes those from our own programmatic fits/resets so we don't persist those), tagged with the address it was taken for ([minimapSettings.ts](src/widgets/minimap/minimapSettings.ts)'s `readStoredMapView`/`withStoredMapView`) so a stale view never gets applied after an address change; "Reset view" now also clears the saved value
 
-## Phase 7 — iPad deployment (skipped for now, see Phase 8)
+## Phase 7 — iPad deployment
 
-- [ ] 7.1 Deploy to chosen static host, confirm stable URL
+- [x] 7.1 Deploy to chosen static host, confirm stable URL — GitHub Pages, deployed via [.github/workflows/deploy.yml](.github/workflows/deploy.yml) (build + `actions/deploy-pages` on every push to `main`); Vite `base`/PWA `start_url`/`scope` set to `/marin-weather-dashboard/` to match the project-page subpath — live at https://flugge00.github.io/marin-weather-dashboard/
 - [ ] 7.2 On iPad: open URL in Safari → Add to Home Screen → verify fullscreen standalone launch
 - [ ] 7.3 Configure iPad Settings: Auto-Lock → Never (or Guided Access pinned to the dashboard) so the display stays on
 - [ ] 7.4 End-to-end test: fresh dashboard creation, address entry, widget placement, save/rename/duplicate/delete, page switching, forced refresh, and a simulated API failure (airplane mode) to confirm status indicators behave correctly
