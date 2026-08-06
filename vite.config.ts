@@ -5,6 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/marin-weather-dashboard/',
   plugins: [
     react(),
     tailwindcss(),
@@ -16,7 +17,8 @@ export default defineConfig({
         short_name: 'Marin Weather',
         description:
           'Always-on kitchen dashboard for weather, water temperature, forecast, and clock.',
-        start_url: '/',
+        start_url: '/marin-weather-dashboard/',
+        scope: '/marin-weather-dashboard/',
         display: 'standalone',
         orientation: 'landscape',
         background_color: '#0b0e14',
